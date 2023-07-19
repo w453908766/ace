@@ -57,7 +57,7 @@ bool runInvocation(
   return Success;
 }
 
-void cc1_main(
+void CC1Main(
   const char *BinaryName, FileManager *Files, 
   DiagnosticsEngine* Diagnostics, const opt::ArgStringList &Args){
  

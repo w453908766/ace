@@ -33,10 +33,10 @@ using namespace std;
 using namespace llvm;
 using namespace clang;
 
-void cc1_main(
+void CC1Main(
   const char *BinaryName, FileManager *Files, 
   DiagnosticsEngine* Diagnostics, const opt::ArgStringList &Args);
- 
+
 static driver::Driver *
 newDriver(DiagnosticsEngine *Diagnostics, const char *BinaryName,
           IntrusiveRefCntPtr<llvm::vfs::FileSystem> VFS){
@@ -60,7 +60,7 @@ void ExecuteJobs(
       std::vector<Optional<StringRef>> Redirects;
       int Res = Job.Execute(Redirects, &Error, &ExecutionFailed);
     } else if(Args.size()>=1 && StringRef(Args[0]).equals("-cc1")) {
-      cc1_main(BinaryName, Files, Diagnostics, Args);
+      CC1Main(BinaryName, Files, Diagnostics, Args);
     } else {
       llvm_unreachable("never handle tool");
     }
@@ -101,6 +101,8 @@ int main(int argc, const char **argv){
   InitLLVM X(argc, argv);
   SmallVector<const char *> Args;
   pushArgs(Args, argc, argv);
+
+  llvm::InitializeAllTargets();
   run(Args);
   return 0;
 }
