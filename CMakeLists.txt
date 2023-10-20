@@ -21,15 +21,13 @@ add_compile_options(
   -fPIC -fno-exceptions -g -Og
 )
 
+include_directories(/home/wang/Pictures/clang+llvm-15.0.7/include)
+link_directories(/home/wang/Pictures/clang+llvm-15.0.7/lib)
+
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
   set(LIB_TYPE STATIC)
-  include_directories(/home/wang/Pictures/clang+llvm-15.0.7/include)
-  link_directories(/home/wang/Pictures/clang+llvm-15.0.7/lib)
 else()
   set(LIB_TYPE SHARED)
-  include_directories(/usr/local/include)
-  link_directories(/usr/local/lib)
-  link_directories(/home/wang/Pictures/clang+llvm-15.0.7/lib)
 endif()
 
 add_executable(aceBuilder main.cpp cc1_main.cpp PushArgs.cpp)
